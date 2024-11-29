@@ -1,7 +1,8 @@
 """Database connection module."""
-from sqlmodel import create_engine, text
+from sqlmodel import create_engine, text, SQLModel
 from sqlalchemy.ext.asyncio import AsyncEngine
 from src.config import settings
+from src.api.v1.books.models import Book
 
 PASSWORD = settings.PASSWORD
 DB_NAME = settings.DB_NAME
@@ -18,6 +19,4 @@ async def init_db():
     async with engine.begin() as conn:
         extension = text("CREATE EXTENSION IF NOT EXISTS pgcrypto")
         await conn.execute(extension)
-        statement = text("SELECT 'hello';")
-        result = await conn.execute(statement)
-        print(result.all())
+        await conn.run_sync(SQLModel.metadata.create_all)
