@@ -4,13 +4,25 @@ from pydantic import BaseModel
 
 class CreateBookSchema(BaseModel):
     """Create book schema"""
-    id: Optional[int] = 0
     title: str
     author: str
     publisher: str
     published_date: str
     page_count: int
     language: str
+
+
+class ResponseBookSchema(BaseModel):
+    """Response book schema"""
+    uid: str
+    title: str
+    author: str
+    publisher: str
+    published_date: str
+    page_count: int
+    language: str
+    created_at: str
+    updated_at: str
 
 
 class UpdateBookSchema(BaseModel):

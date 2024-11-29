@@ -1,6 +1,6 @@
 """Book api model for the database."""
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 from sqlalchemy.dialects.postgresql import (
     UUID, TIMESTAMP
 )
@@ -22,7 +22,7 @@ class Book(SQLModel, table=True):
     title: str
     author: str
     publisher: str
-    published_date: str
+    published_date: date
     page_count: int
     language: str
     created_at: datetime = Field(
