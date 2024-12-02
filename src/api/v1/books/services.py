@@ -1,4 +1,5 @@
 """Book api service"""
+from datetime import datetime
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel import desc, select
 from .models import Book
@@ -35,6 +36,7 @@ class BookService:
         to_update = await self.get_a_book(uid, session)
         if to_update is None:
             return None
+        to_update.updated_at = datetime.now()
         for key, value in book_data.items():
             setattr(to_update, key, value)
         await session.commit()

@@ -1,4 +1,6 @@
+from datetime import date, datetime
 from typing import Optional
+import uuid
 from pydantic import BaseModel
 
 
@@ -7,22 +9,22 @@ class CreateBookSchema(BaseModel):
     title: str
     author: str
     publisher: str
-    published_date: str
+    published_date: date
     page_count: int
     language: str
 
 
 class ResponseBookSchema(BaseModel):
     """Response book schema"""
-    uid: str
+    uid: uuid.UUID
     title: str
     author: str
     publisher: str
-    published_date: str
+    published_date: date
     page_count: int
     language: str
-    created_at: str
-    updated_at: str
+    created_at: datetime
+    updated_at: datetime
 
 
 class UpdateBookSchema(BaseModel):
